@@ -43,10 +43,11 @@ func _ready():
 		# make config file if doesn't exist
 		var config_file = File.new()
 		if config_file.file_exists(config_path):
-			if not config.read_config(config_path):
+			if not config.read_config(config_path): # error in config file
+				printerr("Could not parse config file")
 				get_tree().quit()
 				return
 		else:
-			if not config.populate_config_file_with_defaults(config_path):
+			if not config.populate_config_file_with_defaults(config_path): # couldn't write to config file
 				get_tree().quit()
 				return

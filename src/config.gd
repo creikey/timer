@@ -15,4 +15,7 @@ func read_config(in_path: String) -> bool:
 	if config.load(in_path) != OK:
 		printerr("Failed to load config from '" + in_path + "'")
 		return false
+	
+	preload("res://theme.tres").set_color(
+	
 	return true
