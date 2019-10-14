@@ -15,7 +15,7 @@ var time_loop: Array = [
 ]
 var cur_time_loop_position: int = 0 setget set_cur_time_loop_position
 
-func _ready():
+func ready():
 	self.cur_time_loop_position = 0
 
 func process(delta):
@@ -23,7 +23,7 @@ func process(delta):
 	if cur_delta >= 1.0:
 		cur_delta = 0.0
 		self.time_left -= 1
-		print(self.time_left, "	", self.time_maximum)
+#		print(self.time_left, "	", self.time_maximum)
 
 func set_time_left(new_time_left):
 	if new_time_left < 0:

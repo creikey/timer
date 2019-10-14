@@ -10,6 +10,7 @@ onready var config_filename_folder = config_folder + config_folder_name
 onready var config_path = config_folder + config_folder_name + "/" + config_filename
 
 func _ready():
+	time_keeper.ready()
 	# load config file
 	var config_file_path: String = ""
 	if OS.get_name() == "X11":

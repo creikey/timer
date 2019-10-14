@@ -23,12 +23,15 @@ func _ready():
 	time_keeper.connect("time_updated", self, "_on_time_updated")
 
 func _on_time_updated(new_time, max_time):
-	cur_amount = float(new_time)/float(max_time)
+	$ProgressTween.stop_all()
+	$ProgressTween.interpolate_property(self, "cur_amount", cur_amount, float(new_time)/float(max_time), 0.9, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	$ProgressTween.start()
 
 func _process(delta):
 	if not Engine.editor_hint:
 		radius = radius_ratio * get_viewport().size.x
 		width = width_ratio * get_viewport().size.x
+#	print(cur_amount)
 #	cur_amount += delta/10.0
 #	if cur_amount >= 1.0:
 #		cur_amount = 0.0
@@ -41,9 +44,12 @@ func _draw():
 	while cur_rotation < (2*PI)*cur_amount:
 		points.append(Vector2(radius, 0).rotated(cur_rotation))
 		points[points.size() - 1] += rect_size / 2
-		cur_rotation += (2*PI)/resolution
-	points.append(Vector2(radius, 0).rotated((2*PI)*cur_amount + (2*PI)/resolution))
-	points.append(Vector2(radius, 0).rotated((2*PI)*cur_amount + 2*(2*PI)/resolution))
+		cur_rotation += (2*PI*cur_amount)/resolution
+	if cur_amount == 0.0:
+		return
+	points.append(Vector2(radius, 0).rotated((2*PI)*cur_amount + (2*PI*cur_amount)/resolution))
+	points[points.size() - 1] += rect_size / 2
+	points.append(Vector2(radius, 0).rotated((2*PI)*cur_amount + 2*(2*PI*cur_amount)/resolution))
 	points[points.size() - 1] += rect_size / 2
 	draw_polyline(points, color, width, true)
 #	if center_in_parent:
