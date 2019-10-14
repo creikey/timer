@@ -1,6 +1,8 @@
 tool
 extends Control
 
+const time_keeper = preload("res://time_keeper.tres")
+
 const resolution: int = 128
 
 export (float) var radius = 100.0
@@ -18,6 +20,10 @@ func _ready():
 	else:
 #		set_pocess(false)
 		set_process(true)
+	time_keeper.connect("time_updated", self, "_on_time_updated")
+
+func _on_time_updated(new_time, max_time):
+	cur_amount = float(new_time)/float(max_time)
 
 func _process(delta):
 	if not Engine.editor_hint:

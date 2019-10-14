@@ -15,17 +15,22 @@ var time_loop: Array = [
 ]
 var cur_time_loop_position: int = 0 setget set_cur_time_loop_position
 
+func _ready():
+	self.cur_time_loop_position = 0
+
 func process(delta):
 	cur_delta += delta
 	if cur_delta >= 1.0:
 		cur_delta = 0.0
 		self.time_left -= 1
+		print(self.time_left, "	", self.time_maximum)
 
 func set_time_left(new_time_left):
 	if new_time_left < 0:
 		next_time_segment()
-	time_left = new_time_left
-	emit_signal("time_updated", time_left, time_maximum)
+	else:
+		time_left = new_time_left
+		emit_signal("time_updated", time_left, time_maximum)
 
 func next_time_segment():
 	self.cur_time_loop_position += 1
