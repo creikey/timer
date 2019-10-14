@@ -1,6 +1,7 @@
 extends Node2D
 
 const config = preload("res://config.tres")
+const time_keeper = preload("res://time_keeper.tres")
 
 const config_folder_name = "timer"
 onready var config_folder = OS.get_environment("HOME") + "/.config/"
@@ -51,3 +52,6 @@ func _ready():
 			if not config.populate_config_file_with_defaults(config_path): # couldn't write to config file
 				get_tree().quit()
 				return
+
+func _process(delta):
+	time_keeper.process(delta)

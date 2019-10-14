@@ -15,14 +15,25 @@ anchor_bottom = 1.0
 theme = ExtResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 593.0
+margin_right = 1024.0
+margin_bottom = 600.0
 
 [node name="RadialProgress" type="Control" parent="UI/PanelContainer/CenterContainer"]
-margin_left = 505.0
-margin_top = 293.0
-margin_right = 505.0
-margin_bottom = 293.0
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+rect_rotation = -90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 3 )
+radius = 200.0
+width = 20.0
+color = Color( 1, 1, 1, 1 )
+cur_amount = 0.846
+
+[node name="Label" type="Label" parent="UI/PanelContainer/CenterContainer"]
+margin_left = 512.0
+margin_top = 285.0
+margin_right = 512.0
+margin_bottom = 314.0
