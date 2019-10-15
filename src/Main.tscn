@@ -58,6 +58,8 @@ align = 1
 script = ExtResource( 5 )
 
 [node name="ContinueButton" type="Button" parent="UI/PanelContainer"]
+visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 text = "Continue"
+[connection signal="pressed" from="UI/PanelContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
