@@ -42,5 +42,4 @@ func configure_godot_from_config():
 	
 	theme.default_font = main_font
 	
-	print("Calling configure")
 	emit_signal("configure")

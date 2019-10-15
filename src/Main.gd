@@ -45,8 +45,6 @@ func _ready():
 	time_keeper.ready()
 # warning-ignore:return_value_discarded
 	time_keeper.connect("next_time_segment", self, "_on_next_time_segment")
-	
-	print("connecting")
 # warning-ignore:return_value_discarded
 	config.connect("configure", self, "_on_configure")
 	
@@ -111,5 +109,4 @@ func _on_ContinueButton_pressed():
 	$AlarmPlayer.stop()
 
 func _on_configure():
-	print("setting stream")
 	$AlarmPlayer.stream = load(config.config.get_value("assets", "alarm_noise"))
