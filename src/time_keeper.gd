@@ -2,10 +2,12 @@ extends Resource
 
 signal time_updated(new_time_left, time_maximum) # always in seconds
 signal next_time_segment(new_time_segment_label) # text describing time segment
+signal new_iteration(cur_iterations)
 
 
 var time_left: int = 35 setget set_time_left
 var time_maximum: int = 50
+var iterations: int = 0
 
 var cur_delta = 0.0
 
@@ -34,6 +36,7 @@ func set_time_left(new_time_left):
 
 func next_time_segment():
 	self.cur_time_loop_position += 1
+	
 
 func reset_time_segments():
 	self.cur_time_loop_position = 0
@@ -46,6 +49,8 @@ func set_cur_time_loop_position(new_cur_time_loop_position):
 		pass
 	else:
 		cur_time_loop_position = 0
+		iterations += 1
+		emit_signal("new_iteration", iterations)
 	
 	# update time segment labels and time lefts
 	var cur_time_segment = time_loop[cur_time_loop_position]
