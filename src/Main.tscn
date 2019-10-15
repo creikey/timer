@@ -56,3 +56,8 @@ theme = ExtResource( 2 )
 text = "stuff"
 align = 1
 script = ExtResource( 5 )
+
+[node name="ContinueButton" type="Button" parent="UI/PanelContainer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+text = "Continue"

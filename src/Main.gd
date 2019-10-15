@@ -10,6 +10,35 @@ onready var config_filename_folder = config_folder + config_folder_name
 onready var config_path = config_folder + config_folder_name + "/" + config_filename
 
 func _ready():
+	# load input file
+	if OS.get_cmdline_args().size() <= 0:
+		printerr("Must pass timing file via '--[filename]'")
+	else:
+		var timing_file_name = OS.get_cmdline_args()[0].split("=")[1]
+		var final_timing_array = []
+		var timing_file = File.new()
+		timing_file.open(timing_file_name, File.READ)
+		for line in timing_file.get_as_text().split("\n"):
+			if line != "":
+				# fetch time string
+				var split_line: PoolStringArray = line.split(" ")
+				var time_amount = split_line[0]
+				
+				# fetch times
+				var time_amount_array = time_amount.split(":")
+				var hours = int(time_amount_array[0])
+				var minutes = int(time_amount_array[1])
+				var seconds = int(time_amount_array[2])
+				
+				# re join final label of activity
+				split_line.remove(0)
+				var final_activity_name = split_line.join(" ")
+				
+				final_timing_array.append([final_activity_name, hours*60*60 + minutes*60 + seconds])
+				
+		time_keeper.time_loop = final_timing_array
+	
+	
 	time_keeper.ready()
 	# load config file
 	var config_file_path: String = ""
