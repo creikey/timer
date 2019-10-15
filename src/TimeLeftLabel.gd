@@ -3,9 +3,10 @@ extends Label
 const time_keeper = preload("res://time_keeper.tres")
 
 func _ready():
+# warning-ignore:return_value_discarded
 	time_keeper.connect("time_updated", self, "_on_time_updated")
 
-func _on_time_updated(new_time, max_time):
+func _on_time_updated(new_time, _max_time):
 	var hours = int(new_time/60/60)
 	new_time -= float(hours) * 60 * 60
 	var minutes = int(new_time/60)

@@ -1,6 +1,8 @@
 extends Resource
 
-const config_version = 1
+signal configure
+
+const config_version = 3
 const theme = preload("res://theme.tres")
 
 var config: ConfigFile
@@ -10,6 +12,7 @@ func populate_config_file_with_defaults(in_path: String) -> bool: # returns if s
 	config.set_value("general", "version", config_version)
 	config.set_value("theme", "background_color", ProjectSettings.get("rendering/environment/default_clear_color"))
 	config.set_value("theme", "font", "")
+	config.set_value("assets", "alarm_noise", "res://alarm-noise.ogg")
 	if config.save(in_path) != OK:
 		printerr("Failed to populate default config at '" + in_path + "'")
 		return false
@@ -38,3 +41,6 @@ func configure_godot_from_config():
 		main_font.font_data = theme.default_font.font_data
 	
 	theme.default_font = main_font
+	
+	print("Calling configure")
+	emit_signal("configure")

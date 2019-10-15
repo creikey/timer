@@ -6,6 +6,7 @@ const time_keeper = preload("res://time_keeper.tres")
 const config_folder_name = "timer"
 onready var config_folder = OS.get_environment("HOME") + "/.config/"
 const config_filename = "theme.ini"
+# warning-ignore:unused_class_variable
 onready var config_filename_folder = config_folder + config_folder_name
 onready var config_path = config_folder + config_folder_name + "/" + config_filename
 
@@ -42,9 +43,15 @@ func _ready():
 	
 	
 	time_keeper.ready()
+# warning-ignore:return_value_discarded
 	time_keeper.connect("next_time_segment", self, "_on_next_time_segment")
 	
+	print("connecting")
+# warning-ignore:return_value_discarded
+	config.connect("configure", self, "_on_configure")
+	
 	# load config file
+# warning-ignore:unused_variable
 	var config_file_path: String = ""
 	if OS.get_name() == "X11":
 		
@@ -87,9 +94,11 @@ func _ready():
 				get_tree().quit()
 				return
 
+# warning-ignore:unused_argument
 func _on_next_time_segment(new_time_segment):
 	waiting_for_continue = true
 	$UI/PanelContainer/ContinueButton.visible = true
+	$AlarmPlayer.play()
 
 func _process(delta):
 	if waiting_for_continue:
@@ -99,3 +108,8 @@ func _process(delta):
 func _on_ContinueButton_pressed():
 	waiting_for_continue = false
 	$UI/PanelContainer/ContinueButton.visible = false
+	$AlarmPlayer.stop()
+
+func _on_configure():
+	print("setting stream")
+	$AlarmPlayer.stream = load(config.config.get_value("assets", "alarm_noise"))

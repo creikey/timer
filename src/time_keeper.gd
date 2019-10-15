@@ -10,8 +10,8 @@ var time_maximum: int = 50
 var cur_delta = 0.0
 
 var time_loop: Array = [
-	["work", 4],
-	["break", 3]
+	["work", 1],
+	["break", 2]
 ]
 var cur_time_loop_position: int = 0 setget set_cur_time_loop_position
 
