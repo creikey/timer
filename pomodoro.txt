@@ -1,0 +1,8 @@
+00:25:00 work 1
+00:05:00 break time
+00:25:00 work 2
+00:05:00 break time
+00:25:00 work 3
+00:05:00 break time
+00:25:00 work 4
+00:15:00 big break time
