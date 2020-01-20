@@ -17,6 +17,9 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/PanelContainer"]
 margin_right = 1024.0
@@ -82,7 +85,18 @@ text = "test"
 align = 2
 script = ExtResource( 6 )
 
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+
+[node name="SkipButton" type="Button" parent="UI/PanelContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 600.0
+text = "Skip"
+
 [node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = 24.0
 script = ExtResource( 7 )
 [connection signal="pressed" from="UI/PanelContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="UI/PanelContainer/HBoxContainer/SkipButton" to="." method="_on_SkipButton_pressed"]

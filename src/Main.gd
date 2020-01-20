@@ -17,9 +17,10 @@ func _ready():
 	if OS.get_cmdline_args().size() <= 0:
 		printerr("Must pass timing file via '--[filename]'")
 	else:
-		var timing_file_name = OS.get_cmdline_args()[0].split("=")[1]
+		var timing_file_name = OS.get_cmdline_args()[0].split("--")[1]
 		var final_timing_array = []
 		var timing_file = File.new()
+		print(timing_file_name)
 		timing_file.open(timing_file_name, File.READ)
 		for line in timing_file.get_as_text().split("\n"):
 			if line != "":
@@ -110,3 +111,7 @@ func _on_ContinueButton_pressed():
 
 func _on_configure():
 	$AlarmPlayer.stream = load(config.config.get_value("assets", "alarm_noise"))
+
+
+func _on_SkipButton_pressed():
+	time_keeper.next_time_segment()
